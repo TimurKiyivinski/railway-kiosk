@@ -1,0 +1,84 @@
+<div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Railway Kiosk</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <login-buttons></login-buttons>
+        </ul>
+    </div>
+</div>
+<div class="container" ng-show="$ctrl.currentUser">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn-group">
+                <button class="btn btn-primary">Destination Station</button>
+                <button class="btn btn-success">B</button>
+                <button class="btn btn-success">C</button>
+                <button class="btn btn-success">D</button>
+                <button class="btn btn-success">E</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modalLabel">Input Error</h4>
+                    </div>
+                    <div class="modal-body">
+                        Invalid input provided.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="page-header">
+                <h2>Purchase Ticket</h2>
+            </div>
+            <form class="new-ticket">
+                <div class="form-group">
+                    <label>Destination</label>
+                    <input ng-model="$ctrl.ticket.destination" type="text" class="form-control" placeholder="Destination"/>
+                </div>
+                <div class="form-group">
+                    <label>Number of Tickets</label>
+                    <input ng-model="$ctrl.ticket.count" type="text" class="form-control" placeholder="1"/>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input ng-model="$ctrl.ticket.returning" type="checkbox" value="false"/>
+                        Include return tickets
+                    </label>
+                </div>
+                <button ng-click="$ctrl.addTicket($ctrl.ticket)" type="submit" class="btn btn-primary">Purchase</button>
+            </form>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="page-header">
+                <h2>Purchased Tickets</h2>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="ticket in $ctrl.tickets">
+                    <a href="#" ng-click="$ctrl.removeTicket(ticket)">&times;</a>
+                    <span>{{ ticket.origin }} to {{ ticket.destination }}</span>
+                    <span ng-show="ticket.returning" class="badge">2-Way</span>
+                    <span class="badge">{{ ticket.count }} Tickets</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

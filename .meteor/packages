@@ -20,3 +20,5 @@ autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 angular-templates
 accounts-password
+twbs:bootstrap
+carlosbaraza:accounts-ui-bootstrap-3-angular

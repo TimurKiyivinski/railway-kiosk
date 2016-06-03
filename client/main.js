@@ -1,22 +1,20 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import angular from 'angular';
+import angularMeteor from 'angular-meteor';
+import kiosk from '../imports/components/kiosk/kiosk';
+import '../imports/startup/accounts-config.js'
 
-import './main.html';
+angular.module('Railway-Kiosk', [
+  angularMeteor,
+  kiosk.name,
+  'accounts.ui'
+]);
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
+function onReady() {
+    angular.bootstrap(document, ['Railway-Kiosk']);
+}
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+if (Meteor.isCordova) {
+    angular.element(document).on('deviceready', onReady);
+} else {
+    angular.element(document).ready(onReady);
+}
